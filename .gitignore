@@ -1,0 +1,26 @@
+# bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# environments
+venv/
+ENV/
+env/
+.env
+
+# data
+data/
+*.db
+*.lancedb
+
+# testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ide
+.vscode/
+.idea/
+*.swp
+*.swo
