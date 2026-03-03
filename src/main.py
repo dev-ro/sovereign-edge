@@ -2,9 +2,14 @@ import logging
 import signal
 import sys
 import time
-from src.mqtt_router import MQTTRouter
-from src.vector_store import VectorStore
-from src.inference_engine import InferenceEngine
+try:
+    from src.mqtt_router import MQTTRouter
+    from src.vector_store import VectorStore
+    from src.inference_engine import InferenceEngine
+except ImportError:
+    from mqtt_router import MQTTRouter
+    from vector_store import VectorStore
+    from inference_engine import InferenceEngine
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("sovereign_edge")
