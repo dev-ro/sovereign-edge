@@ -33,8 +33,19 @@ class MQTTRouter:
             logger.error(f"failed to parse message: {e}")
 
     def connect(self):
-        self.client.connect(self.broker, self.port, 60)
-        self.client.loop_start()
+        import time
+        retry_delay = 1
+        max_delay = 60
+        while True:
+            try:
+                self.client.connect(self.broker, self.port, 60)
+                self.client.loop_start()
+                logger.info("mqtt loop started")
+                break
+            except Exception as e:
+                logger.error(f"connection failed: {e}. retrying in {retry_delay}s...")
+                time.sleep(retry_delay)
+                retry_delay = min(retry_delay * 2, max_delay)
 
     def disconnect(self):
         self.client.loop_stop()
